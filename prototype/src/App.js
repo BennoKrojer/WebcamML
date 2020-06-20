@@ -1,27 +1,17 @@
 import React from 'react';
-import image from '../images/stabel.jpg';
 import './App.css';
 
+var Date = require('./assets/date.json');
+var RelPath = "images/current.jpg";
 
 function App() {
-  var path = "../images/stabel.jpg"
-  var file = new File(path);
-  var date = file.lastModifiedDate;
   return (
     <div className="App">
       <header className="App-header">
-        <img src={path} className="App-logo" alt="logo" />
+        <img width="1194" height="672" src={RelPath} className="webcam-image" alt="View of Munich, Germany including the Frauenkirche, Staatsoper, Theatinerkirche and Olympiapark." />
         <p>
-          Date: {date}
+          Date: {Date.string}
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
       </header>
     </div>
   );
