@@ -1,19 +1,17 @@
-import re
 from PIL import Image
 import config
-import tensorflow as tf
-import numpy as np
+from glob import glob
+import pandas as pd
+
 
 def get_image_paths():
+    d = {'path': [], 'label': []}
+    for file in glob(str(config.images)+'/*.jpg'):
+        splits = file.split('_')
+        if len(splits) == 3:
+            label = float(splits[2][:-4])
+            d['path'].append(file)
+            d['label'].append(label)
+    return pd.DataFrame.from_dict(d)
 
 
-image_generator = tf.keras.preprocessing.image.ImageDataGenerator(rescale=1./255)
-BATCH_SIZE = 32
-IMG_HEIGHT = 224
-IMG_WIDTH = 224
-STEPS_PER_EPOCH = np.ceil(image_count/BATCH_SIZE)
-train_data_gen = image_generator.flow_from_directory(directory=str(data_dir),
-                                                     batch_size=BATCH_SIZE,
-                                                     shuffle=True,
-                                                     target_size=(IMG_HEIGHT, IMG_WIDTH),
-                                                     classes = list(CLASS_NAMES))
