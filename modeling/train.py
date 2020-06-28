@@ -1,5 +1,7 @@
 from modeling.dataloader import get_image_paths
 import tensorflow as tf
+from PIL import Image
+import config
 
 df = get_image_paths()
 
@@ -25,12 +27,15 @@ model = tf.keras.Sequential([
     tf.keras.layers.Dense(1)
 ])
 
-
-
 optimizer = tf.keras.optimizers.Adam(learning_rate=0.01)
 
 model.compile(loss='mse',
               optimizer=optimizer,
               metrics=['mae', 'mse'])
 
-model.fit(train_data_gen, epochs=100)
+model.fit(train_data_gen, epochs=2)
+
+example = Image.open(config.images/'2020-06-20_12-45-00.jpg')
+array = tf.keras.preprocessing.image.img_to_array(example)
+
+model(example)

@@ -1,1 +1,4 @@
 prototype/src/assets/
+modeling/images/*
+venv
+.idea/
