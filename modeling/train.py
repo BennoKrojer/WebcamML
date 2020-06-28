@@ -1,6 +1,7 @@
 from modeling.dataloader import get_image_paths
 import tensorflow as tf
 from PIL import Image
+import numpy as np
 import config
 
 df = get_image_paths()
@@ -33,9 +34,11 @@ model.compile(loss='mse',
               optimizer=optimizer,
               metrics=['mae', 'mse'])
 
-model.fit(train_data_gen, epochs=2)
+model.fit(train_data_gen, epochs=1)
 
-example = Image.open(config.images/'2020-06-20_12-45-00.jpg')
-array = tf.keras.preprocessing.image.img_to_array(example)
-
-model(example)
+img = Image.open(config.images/'2020-06-20_12-45-00.jpg')
+img = img.resize((IMG_WIDTH, IMG_HEIGHT))
+array = tf.keras.preprocessing.image.img_to_array(img)
+print(array)
+print(array.shape)
+print(model.predict([array]))
