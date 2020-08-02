@@ -1,1 +1,4 @@
 prototype/src/assets/
+.idea/
+venv/
+modeling/__pycache__/

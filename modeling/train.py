@@ -28,7 +28,6 @@ numpy.random.seed(41)
 train_data_gen = image_generator.flow_from_dataframe(df, x_col='path', y_col='label',
                                                      batch_size=BATCH_SIZE,
                                                      shuffle=True,
-                                                     class_mode='raw',
                                                      width_shift_range=[-SHIFT_DELTA, SHIFT_DELTA],
                                                      rotation_range=ROTATION_DELTA,
                                                      brightness_range=[BRIGHTNESS_FACTOR_MIN, 1.0],
@@ -37,7 +36,6 @@ train_data_gen = image_generator.flow_from_dataframe(df, x_col='path', y_col='la
 valid_data_gen = image_generator.flow_from_dataframe(df, x_col='path', y_col='label',
                                                      batch_size=BATCH_SIZE,
                                                      shuffle=True,
-                                                     class_mode='raw',
                                                      width_shift_range=[-SHIFT_DELTA, SHIFT_DELTA],
                                                      rotation_range=ROTATION_DELTA,
                                                      brightness_range=[BRIGHTNESS_FACTOR_MIN, 1.0],
@@ -53,7 +51,7 @@ model = tf.keras.Sequential([
     base_model,
     tf.keras.layers.GlobalAveragePooling2D(),
     tf.keras.layers.Dropout(0.5),
-    tf.keras.layers.Dense(5)
+    tf.keras.layers.Dense(5, activation='softmax')
 ])
 
 optimizer = tf.keras.optimizers.Adam(learning_rate=0.01)

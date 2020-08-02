@@ -9,7 +9,7 @@ def get_image_paths():
     for file in glob(str(config.images)+'/*.jpg'):
         splits = file.split('_')
         if len(splits) == 3:
-            label = int(splits[2][:-4])
+            label = splits[2][:-4]
             d['path'].append(file)
             d['label'].append(label)
     return pd.DataFrame.from_dict(d)
