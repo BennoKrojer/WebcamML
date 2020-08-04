@@ -4,8 +4,8 @@ import numpy
 
 # Parameters
 BATCH_SIZE = 32
-IMG_HEIGHT = 224
-IMG_WIDTH = 224
+IMG_HEIGHT = 400
+IMG_WIDTH = 400
 RESERVE_VALIDATION = 0.2
 # Shift and rotation is somewhat likely in our case (webcam might be moved or rotated slightly by accident)
 # So we use small value as it's not common to happen
@@ -41,17 +41,24 @@ valid_data_gen = image_generator.flow_from_dataframe(df, x_col='path', y_col='la
                                                      brightness_range=[BRIGHTNESS_FACTOR_MIN, 1.0],
                                                      target_size=(IMG_HEIGHT, IMG_WIDTH), subset='validation')
 
+# for x, y in valid_data_gen:
+#     print(x)
+#     print(y)
+
 base_model = tf.keras.applications.MobileNetV2(input_shape=(IMG_HEIGHT, IMG_WIDTH, 3),
                                                include_top=False,
                                                weights='imagenet')
-base_model.trainable = False
-
+# base_model.trainable = True
+# for i, layer in enumerate(base_model.layers):
+#     if i > 150:
+#         layer.trainable = True
 print(base_model.summary())
 model = tf.keras.Sequential([
     base_model,
     tf.keras.layers.GlobalAveragePooling2D(),
+    tf.keras.layers.Dense(16, activation='relu'),
     tf.keras.layers.Dropout(0.5),
-    tf.keras.layers.Dense(5, activation='softmax')
+    tf.keras.layers.Dense(4, activation='softmax')
 ])
 
 optimizer = tf.keras.optimizers.Adam(learning_rate=0.01)
