@@ -64,4 +64,12 @@ model.compile(loss='categorical_crossentropy',
               optimizer=optimizer,
               metrics=['accuracy', 'categorical_crossentropy'])
 
-model.fit(train_data_gen, epochs=100, validation_data=valid_data_gen)
+checkpoint_path = "training_1/cp.ckpt"
+
+cp_callback = tf.keras.callbacks.ModelCheckpoint(filepath=checkpoint_path,
+                                                 save_weights_only=True,
+                                                 verbose=1)
+
+
+model.fit(train_data_gen, epochs=100, validation_data=valid_data_gen, callbacks=cp_callback)
+model.save('model.tf')
