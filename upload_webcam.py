@@ -4,8 +4,9 @@ import json
 from time import localtime, strftime
 
 time = strftime("%a, %d %b %Y %H:%M:%S", localtime())
+filename = strftime("%d-%b-%Y_%H:%M:%S", localtime())
 json.dump({'distance': '10'}, open('distance.json', 'w'))
-json.dump({'string': time}, open('date.json', 'w'))
+json.dump({'string': time, 'filename': filename}, open('date.json', 'w'))
 url = 'http://localhost:8765/picture/4/current/'  # URL from raspberry
 r = requests.get(url)
 img_data = r.content
