@@ -41,9 +41,6 @@ valid_data_gen = image_generator.flow_from_dataframe(df, x_col='path', y_col='la
                                                      brightness_range=[BRIGHTNESS_FACTOR_MIN, 1.0],
                                                      target_size=(IMG_HEIGHT, IMG_WIDTH), subset='validation')
 
-# for x, y in valid_data_gen:
-#     print(x)
-#     print(y)
 
 base_model = tf.keras.applications.MobileNetV2(input_shape=(IMG_HEIGHT, IMG_WIDTH, 3),
                                                include_top=False,
