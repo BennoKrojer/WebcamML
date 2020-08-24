@@ -1,7 +1,7 @@
 from modeling.dataloader import get_image_paths
 import tensorflow as tf
 import numpy
-
+tf.keras.optimizers.RMSprop
 # Parameters
 BATCH_SIZE = 32
 IMG_HEIGHT = 400
