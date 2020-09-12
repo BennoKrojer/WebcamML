@@ -4,7 +4,7 @@ import MetaTags from 'react-meta-tags';
 import './App.css';
 
 var Date = require('./assets/date.json');
-var RelPath = "images/current.jpg";
+var RelPath = "/images/current.jpg";
 
 function App() {
   return (
