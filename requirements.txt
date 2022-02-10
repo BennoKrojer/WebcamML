@@ -1,4 +1,4 @@
-tensorflow==2.2.0
+tensorflow==2.5.3
 Pillow==7.1.2
 numpy~=1.19.0
 pandas~=1.0.5
